@@ -1,0 +1,12 @@
+package com.zyx.course.eo;
+
+import lombok.Data;
+
+@Data
+public class ProjectStudent {
+    private Integer id;
+    private Integer userId;
+    private Integer projedtId;
+    private Integer ispass;
+    private String createTime;
+}

@@ -61,7 +61,40 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 				time: 1000
 			});
 		});
-	}
+	};
+    window.admin_del = function (obj, id) {
+        layer.confirm('确认要删除吗？', function(index) {
+            //发异步删除数据
+            lay.msg(obj.data.id);
+            $.ajax(
+                {
+                    //contentType: "application/json",
+                    type:'get',
+                    url:'/deleteUser',
+                    datatype:"json",
+                    data:{id:obj.data.id},
+                    success: function (result) {
+                        if (result.code==0) {
+                            //obj.del(); //删除对应行（tr）的DOM结构
+                            layer.close(index);
+                        }
+                        else {
+
+                        }
+
+                    },
+                    error:function () {
+                        layer.msg('异常');
+                    }
+                }
+            );
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!', {
+                icon: 1,
+                time: 1000
+            });
+        });
+    };
 
 
 	window.delAll = function (argument) {

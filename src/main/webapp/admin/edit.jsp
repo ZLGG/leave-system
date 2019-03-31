@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
@@ -15,52 +16,30 @@
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  
+
   <body>
     <div class="weadmin-body">
         <form class="layui-form">
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
-                  <span class="we-red">*</span>登录名
+              <label  class="layui-form-label">
+                  <span class="we-red">*</span>学号
               </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required"
-                  autocomplete="off" value="admin" class="layui-input">
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="we-red">${sessionScope.user.number}</span>
               </div>
               <div class="layui-form-mid layui-word-aux">
-                  <span class="we-red">*</span>将会成为您唯一的登入名
+                  <span class="we-red">*</span>您唯一的登入号
               </div>
           </div>
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="we-red">*</span>手机
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" value="18925139194" id="phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="we-red">*</span>将会成为您唯一的登入名
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="we-red">*</span>邮箱
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" value="113664000@qq.com" id="L_email" name="email" required="" lay-verify="email"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="we-red">*</span>
-              </div>
-          </div>
+
           <div class="layui-form-item" aria-autocomplete="both">
               <label class="layui-form-label"><span class="we-red">*</span>角色</label>
-              <div class="layui-input-block" >
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="超级管理员" checked="" >
-                <input type="checkbox" name="like1[read]" lay-skin="primary" title="编辑人员">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="宣传人员" >
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="we-red">
+                      <c:if test="${sessionScope.user.role=0}">学生</c:if>
+                      <c:if test="${sessionScope.user.role=1}">教师</c:if>
+                      <c:if test="${sessionScope.user.role=2}">管理员</c:if>
+                  </span>
               </div>
           </div>
           <div class="layui-form-item" style="margin-top: 10px">
@@ -68,7 +47,7 @@
                   <span class="we-red">*</span>密码
               </label>
               <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                  <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -88,7 +67,7 @@
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  增加
+                  确定
               </button>
           </div>
       </form>
@@ -102,7 +81,7 @@
 	      var form = layui.form,
 	      	admin = layui.admin,
 	      	layer = layui.layer;
-        
+
           //自定义验证规则
           form.verify({
             nikename: function(value){
@@ -122,17 +101,45 @@
           form.on('submit(add)', function(data){
             console.log(data);
             //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-            });
-            return false;
+              $.ajax(
+                  {
+                      type:'get',
+                      url:'/addProject',
+                      datatype:"json",
+                      data:data.field,
+                      success: function (result) {
+                          if (result.code==200) {
+                              layer.alert("修改成功", {icon: 6},function () {
+                                  // 获得frame索引
+                                  var index = parent.layer.getFrameIndex(window.name);
+                                  //关闭当前frame
+                                  parent.layer.close(index);
+                                  // 可以对父窗口进行刷新
+                                  x_admin_father_reload();
+                              });
+                          }
+                          else {
+                              layer.msg('异常');
+                          }
+
+                      },
+                      error:function () {
+                          layer.msg('异常');
+                      }
+                  }
+              );
+
+              return false;
           });
-          
+
         });
     </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();</script>
   </body>
 
 </html>

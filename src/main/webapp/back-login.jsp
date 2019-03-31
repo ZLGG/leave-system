@@ -24,7 +24,7 @@
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" >
-            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <input name="userName" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
@@ -43,9 +43,31 @@
               //监听提交
               form.on('submit(login)', function(data){
                 // alert(888)
-                layer.msg(JSON.stringify(data.field),function(){
+               /* layer.msg(JSON.stringify(data.field),function(){
                     location.href='index.html'
-                });
+                });*/
+                  $.ajax(
+                      {
+                          type:'get',
+                          url:'/login',
+                          datatype:"json",
+                          data:data.field,
+                          success: function (result) {
+                              if (result.code==0) {
+                                  setTimeout(function () {
+                                      window.location.href = "/test/houtai";
+                                  },1000)
+                              }
+                              else {
+
+                              }
+
+                          },
+                          error:function () {
+                              layer.msg('异常');
+                          }
+                      }
+                  );
                 return false;
               });
             });

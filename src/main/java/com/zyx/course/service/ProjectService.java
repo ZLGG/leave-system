@@ -1,0 +1,49 @@
+package com.zyx.course.service;
+
+import com.zyx.course.eo.ProjectEo;
+import com.zyx.course.eo.Result;
+import com.zyx.course.mapper.ProjectMapper;
+import com.zyx.course.vo.DataVo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import javax.xml.crypto.Data;
+import java.util.List;
+@Service
+public class ProjectService {
+    @Resource
+    private ProjectMapper ProjectMapper;
+    @Transactional
+    public Result selectProjectList(String page,String limit) {
+        int i = (Integer.parseInt(page) - 1) * 10;
+        int i1 = Integer.parseInt(limit);
+        List<DataVo> dataVos = ProjectMapper.selectProject(i, i1);
+        Integer count = ProjectMapper.selectCount();
+        return new Result<>(0,"",dataVos,count);
+    }
+
+    public void deleteUser(Integer id) {
+        ProjectMapper.deleteProject(id);
+    }
+
+    public List<DataVo> selectStudentProject(Integer id) {
+        List<DataVo> data = ProjectMapper.selectStudentProject(id);
+        return data;
+    }
+
+    @Transactional
+    public Result selectTeacherProject(Integer id,String page,String limit) {
+        int i = (Integer.parseInt(page) - 1) * 10;
+        int i1 = Integer.parseInt(limit);
+        List<DataVo> dataVos = ProjectMapper.selectTeacherProject(id, i, i1);
+        Integer count = ProjectMapper.selectCount();
+
+        return new Result(0, "", dataVos, count);
+    }
+
+    public void insertProject(DataVo DataVo) {
+        ProjectMapper.insertProject(DataVo);
+
+    }
+}

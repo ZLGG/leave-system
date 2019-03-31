@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,30 +13,17 @@
     <div class="layui-header">
         <div class="layui-logo">layui 后台布局</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
-            </li>
-        </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
+                    ${sessionScope.user.userName}
                 </a>
                 <dl class="layui-nav-child">
                     <%--<dd><a href="">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>--%>
                         <dd>
-                            <a onclick="WeAdminShow('个人信息','/test/admin/edit')">个人信息</a>
+                            <a onclick="WeAdminShow('个人信息','/test/admin/admin-edit')">个人信息</a>
                         </dd>
                         <dd>
                             <a onclick="WeAdminShow('切换帐号','/test/back-login')">切换帐号</a>
@@ -46,136 +33,46 @@
                         </dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="/signOut">退出</a></li>
         </ul>
     </div>
 
-    <%--<div class="layui-side layui-bg-black">
-       &lt;%&ndash; <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
-            </ul>
-        </div>&ndash;%&gt;
-           <div class="layui-tab layui-tab-card site-demo-button" style="position: relative;">
-               <ul class="layui-nav layui-nav-tree layui-nav-side">
-                   <li class="layui-nav-item layui-nav-itemed">
-                       <a href="javascript:;">默认展开</a>
-                       <dl class="layui-nav-child">
-                           <dd>
-                               <a data-url="a" data-id="11" data-title="选项a" href="#" class="site-demo-active" data-type="tabAdd">选项a</a>
-                           </dd>
-                           <dd>
-                               <a href="#" data-url="b" data-title="选项b"  data-id="22" class="site-demo-active" data-type="tabAdd">选项b</a>
-                           </dd>
-                           <dd>
-                               <a href="">跳转</a>
-                           </dd>
-                       </dl>
-                   </li>
-                   <li class="layui-nav-item">
-                       <a href="javascript:;">解决方案</a>
-                       <dl class="layui-nav-child">
-                           <dd>
-                               <a href="">移动模块</a>
-                           </dd>
-                           <dd>
-                               <a href="">后台模版</a>
-                           </dd>
-                           <dd>
-                               <a href="">电商平台</a>
-                           </dd>
-                       </dl>
-                   </li>
-                   <li class="layui-nav-item">
-                       <a href="#" data-url="c" data-title="选项c"  data-id="33" class="site-demo-active" data-type="tabAdd">产品c</a>
-                   </li>
-                   <li class="layui-nav-item">
-                       <a href="">大数据</a>
-                   </li>
-               </ul>
 
-               <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">
-                   <ul class="layui-tab-title">
-                   </ul>
-                   <ul class="rightmenu" style="display: none;position: absolute;">
-                       <li data-type="closethis">关闭当前</li>
-                       <li data-type="closeall">关闭所有</li>
-                   </ul>
-                   <div class="layui-tab-content">
-                   </div>
-               </div>
-
-           </div>
-    </div>--%>
     <div class="layui-tab layui-tab-card site-demo-button" style="position: relative;" >
         <ul class="layui-nav layui-nav-tree layui-nav-side" style="top: 60px;">
             <li class="layui-nav-item <%--layui-nav-itemed--%>">
-                <a href="javascript:;">用户管理</a>
+                <a href="javascript:;">学生</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a data-url="/test/member-list1" data-id="11" data-title="用户列表" href="#" class="site-demo-active" data-type="tabAdd">用户列表</a>
+                        <a data-url="/test/studentproject-list" data-id="11" data-title="选课" href="#" class="site-demo-active" data-type="tabAdd">选课</a>
                     </dd>
                     <dd>
-                        <a href="#" data-url="/test/city" data-title="城市联动"  data-id="24" class="site-demo-active" data-type="tabAdd">城市联动</a>
+                        <a href="#" data-url="/test/studentmy-list" data-title="我的课程"  data-id="24" class="site-demo-active" data-type="tabAdd">我的课程</a>
                     </dd>
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="javascript:;">商品管理</a>
+                <a href="javascript:;">教师</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a data-url="/test/item-list" data-id="12" data-title="商品列表" href="#" class="site-demo-active" data-type="tabAdd">商品列表</a>
-                    </dd>
-                    <dd>
-                        <a href="#" data-url="/test/catalog-list" data-title="类目列表"  data-id="22" class="site-demo-active" data-type="tabAdd">类目列表</a>
-                    </dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">订单管理</a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a data-url="/test/order-list" data-id="28" data-title="全部订单" href="#" class="site-demo-active" data-type="tabAdd">全部订单</a>
+                        <a data-url="/test/teachproject-list" data-id="12" data-title="我的课程" href="#" class="site-demo-active" data-type="tabAdd">我的课程</a>
                     </dd>
 
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="javascript:;">资讯管理</a>
+                <a href="javascript:;">管理员</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a data-url="/test/information-list" data-id="30" data-title="资讯列表" href="#" class="site-demo-active" data-type="tabAdd">资讯列表</a>
+                        <a data-url="/test/admin-list" data-id="28" data-title="用户列表" href="#" class="site-demo-active" data-type="tabAdd">用户列表</a>
+                    </dd>
+                    <dd>
+                        <a href="#" data-url="/test/project-list" data-title="课程列表"  data-id="22" class="site-demo-active" data-type="tabAdd">课程列表</a>
                     </dd>
 
                 </dl>
             </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">管理员管理</a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a data-url="/test/admin-list" data-id="29" data-title="管理员列表" href="#" class="site-demo-active" data-type="tabAdd">管理员列表</a>
-                    </dd>
-                </dl>
-            </li>
+
         </ul>
 
         <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">

@@ -24,18 +24,30 @@
     <div class="x-body">
         <form class="layui-form">
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>登录名
+              <label for="number" class="layui-form-label">
+                  <span class="x-red">*</span>学号/工号
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required"
+                  <input type="text" id="number" name="number" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>将会成为您唯一的登入名
               </div>
           </div>
-          <div class="layui-form-item">
+            <div class="layui-form-item">
+                <label for="username" class="layui-form-label">
+                    <span class="x-red">*</span>用户名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="userName" name="userName" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>将会成为您唯一的登入名
+                </div>
+            </div>
+        <%--  <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
                   <span class="x-red">*</span>手机
               </label>
@@ -59,13 +71,13 @@
                   <span class="x-red">*</span>
               </div>
           </div>
-
+--%>
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>密码
               </label>
               <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                  <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -81,6 +93,14 @@
                   autocomplete="off" class="layui-input">
               </div>
           </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>角色</label>
+                <div class="layui-input-block" aria-required="true">
+                    <input type="radio" name="role" lay-skin="primary" value="0" title="学生" checked="" required="" lay-verify="role">
+                    <input type="radio" name="role" lay-skin="primary" value="1" title="教师">
+                    <input type="radio" name="role" lay-skin="primary" value="2" title="管理员" >
+                </div>
+            </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -88,14 +108,7 @@
                   增加
               </button>
           </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label"><span class="x-red">*</span>角色</label>
-                <div class="layui-input-block">
-                    <input type="checkbox" name="like1[write]" lay-skin="primary" title="超级管理员" checked="">
-                    <input type="checkbox" name="like1[read]" lay-skin="primary" title="编辑人员">
-                    <input type="checkbox" name="like1[write]" lay-skin="primary" title="宣传人员" checked="">
-                </div>
-            </div>
+
       </form>
     </div>
     <script>
@@ -107,8 +120,8 @@
           //自定义验证规则
           form.verify({
             nikename: function(value){
-              if(value.length < 5){
-                return '昵称至少得5个字符啊';
+              if(value.length < 11){
+                return '学号/工号至少得11个字符啊';
               }
             }
             ,pass: [/(.+){6,12}$/, '密码必须6到12位']
@@ -122,15 +135,33 @@
           //监听提交
           form.on('submit(add)', function(data){
             console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-                // 可以对父窗口进行刷新 
-                x_admin_father_reload();
-            });
+              $.ajax(
+                  {
+                      type:'get',
+                      url:'/addUser',
+                      datatype:"json",
+                      data:data.field,
+                      success: function (result) {
+                          if (result.code==200) {
+                              layer.alert("增加成功", {icon: 6},function () {
+                                  // 获得frame索引
+                                  var index = parent.layer.getFrameIndex(window.name);
+                                  //关闭当前frame
+                                  parent.layer.close(index);
+                                  // 可以对父窗口进行刷新
+                                  x_admin_father_reload();
+                              });
+                          }
+                          else {
+                              layer.msg('异常');
+                          }
+
+                      },
+                      error:function () {
+                          layer.msg('异常');
+                      }
+                  }
+              );
             return false;
           });
           
