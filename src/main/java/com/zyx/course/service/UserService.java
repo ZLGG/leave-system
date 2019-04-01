@@ -1,9 +1,6 @@
 package com.zyx.course.service;
 
-import com.zyx.course.eo.ProjectDate;
-import com.zyx.course.eo.ProjectEo;
-import com.zyx.course.eo.Result;
-import com.zyx.course.eo.UserEo;
+import com.zyx.course.eo.*;
 import com.zyx.course.mapper.UserMapper;
 import com.zyx.course.vo.DataVo;
 import org.springframework.stereotype.Service;
@@ -48,4 +45,18 @@ public class UserService {
     public void insertUser(UserEo UserEo) {
         UserMapper.insertUser(UserEo);
     }
+
+    public UserEo Login(UserEo UserEo) {
+
+        UserEo eo = UserMapper.selectUser(UserEo);
+        return eo;
+    }
+
+    public void updateUser(UserEo UserEo) {
+        UserMapper.updateUser(UserEo);
+
+    }
+
+
+
 }

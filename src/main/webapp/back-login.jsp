@@ -24,7 +24,7 @@
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" >
-            <input name="userName" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <input name="number" placeholder="账号"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
@@ -56,10 +56,10 @@
                               if (result.code==0) {
                                   setTimeout(function () {
                                       window.location.href = "/test/houtai";
-                                  },1000)
+                                  },100)
                               }
                               else {
-
+                                  layer.msg("账号或密码错误");
                               }
 
                           },

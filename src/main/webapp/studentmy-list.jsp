@@ -270,7 +270,7 @@
             }
             else if(layEvent === 'del'){
                 layer.confirm('确认取消吗', function(index){
-                    obj.del(); //删除对应行（tr）的DOM结构
+                    /*obj.del(); //删除对应行（tr）的DOM结构*/
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax(
@@ -281,10 +281,14 @@
                             data:{id:obj.data.id},
                             success: function (result) {
                                 if (result.code==0) {
-
+                                    layer.msg("取消成功");
+                                    location.replace(location.href);
+                                }
+                                else if (result.code==1) {
+                                    layer.msg("已结课");
                                 }
                                 else {
-
+                                    layer.msg("出错");
                                 }
 
                             },
@@ -296,7 +300,7 @@
 
                 });
             } else if(layEvent === 'edit'){
-                layer.msg('确认选择',{time:1000});
+                //layer.msg('确认选择',{time:1000});
                 /* layer.msg('编辑操作');
                  layer.open({
                      type: 2,

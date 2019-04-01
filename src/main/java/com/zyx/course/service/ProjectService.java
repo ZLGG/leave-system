@@ -1,6 +1,7 @@
 package com.zyx.course.service;
 
 import com.zyx.course.eo.ProjectEo;
+import com.zyx.course.eo.ProjectStudent;
 import com.zyx.course.eo.Result;
 import com.zyx.course.mapper.ProjectMapper;
 import com.zyx.course.vo.DataVo;
@@ -42,8 +43,34 @@ public class ProjectService {
         return new Result(0, "", dataVos, count);
     }
 
+
     public void insertProject(DataVo DataVo) {
         ProjectMapper.insertProject(DataVo);
+
+    }
+    public void insertprojectStudent(ProjectStudent ProjectStudent) {
+        ProjectMapper.insertprojectStudent(ProjectStudent);
+    }
+
+    public ProjectStudent selectProjectStudent(ProjectStudent ProjectStudent) {
+        ProjectStudent projectStudent = ProjectMapper.selectProjectStudent(ProjectStudent);
+        return projectStudent;
+    }
+    public void deleteProjectStudent(Integer id) {
+        ProjectMapper.deleteProjectStudent(id);
+    }
+
+    public ProjectStudent selectProjectById(Integer id) {
+        ProjectStudent projectStudent = ProjectMapper.selectProjectById(id);
+        return projectStudent;
+    }
+
+    public void updateIsPassNot(Integer id) {
+        ProjectMapper.updateIsPassNot(id);
+    }
+
+    public void updateIsPass(Integer id) {
+        ProjectMapper.updateIsPass(id);
 
     }
 }

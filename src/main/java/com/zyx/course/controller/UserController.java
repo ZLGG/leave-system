@@ -88,7 +88,11 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/login")
     public Result login(UserEo UserEo, HttpSession session) {
-        session.setAttribute("user", UserEo);
+       UserEo login = UserService.Login(UserEo);
+        if (login == null) {
+            return new Result(1, "", "");
+        }
+        session.setAttribute("user", login);
         return new Result(0, "", "");
     }
 
@@ -100,8 +104,11 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/updateUser")
-    public Result updateUser(UserEo UserEo) {
-        return new Result();
+    public Result updateUser(UserEo UserEo,HttpSession session) {
+        UserEo user = (UserEo)session.getAttribute("user");
+        user.setPassword(UserEo.getPassword());
+        UserService.updateUser(user);
+        return new Result(0,"","");
     }
 
     @ResponseBody
@@ -126,4 +133,7 @@ public class UserController {
         UserService.insertUser(DataVo);
         return new Result(200, "", "");
     }
+
+
+
 }

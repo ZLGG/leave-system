@@ -280,7 +280,7 @@
                 testShow()
             } else if(layEvent === 'del'){
                 layer.confirm('确定不及格', function(index){
-                    obj.del(); //删除对应行（tr）的DOM结构
+                    //obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax(
@@ -291,13 +291,13 @@
                             data:{id:obj.data.id},
                             success: function (result) {
                                 if (result.code==0) {
-
+                                    layer.msg("成功");
                                 }
-                                if (result.code==1) {
-                                    lay.msg("不可更改,已出成绩")
+                                else if (result.code==1) {
+                                    layer.msg("不可更改,已出成绩");
                                 }
                                 else {
-
+                                    layer.msg('出错');
                                 }
 
                             },
@@ -306,10 +306,11 @@
                             }
                         }
                     );
-
+                  /*  layer.close(index);*/
                 });
             } else if(layEvent === 'edit'){
-                layer.msg('确认及格',{time:1000});
+                layer.confirm('确定及格', function(index){
+                    layer.close(index);
                 $.ajax(
                     {
                         type:'get',
@@ -318,13 +319,13 @@
                         data:{id:obj.data.id},
                         success: function (result) {
                             if (result.code==0) {
-
+                                layer.msg("成功");
                             }
-                            if (result.code==1) {
-                                lay.msg("不可更改,已出成绩")
+                            else if (result.code==1) {
+                                layer.msg("不可更改,已出成绩");
                             }
                             else {
-
+                                layer.msg('出错');
                             }
 
                         },
@@ -333,6 +334,8 @@
                         }
                     }
                 );
+
+                });
             }
         });
 

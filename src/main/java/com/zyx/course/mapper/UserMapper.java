@@ -2,6 +2,7 @@ package com.zyx.course.mapper;
 
 import com.zyx.course.eo.ProjectDate;
 import com.zyx.course.eo.ProjectEo;
+import com.zyx.course.eo.ProjectStudent;
 import com.zyx.course.eo.UserEo;
 import com.zyx.course.vo.DataVo;
 import org.apache.ibatis.annotations.*;
@@ -24,6 +25,9 @@ public interface UserMapper {
             "<if test='id!=null'>and id= #{id}</if>" +
             "</script>")
     List<DataVo> selectUserList(@Param("id") Integer id);
+
+    @Select("select * from user where number=#{eo.number} and password=#{eo.password}")
+    UserEo selectUser(@Param("eo") UserEo UserEo);
 
     @Insert("insert into project_date (beginTime,endTime)values(#{eo.beginTime},#{eo.endTime})")
     void insertDate(@Param("eo") ProjectDate eo);

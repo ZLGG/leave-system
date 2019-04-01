@@ -32,7 +32,7 @@
                 <span class="we-red">${sessionScope.user.number}</span>
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="we-red">*</span>您唯一的登入号
+                <span class="we-red"></span>
             </div>
         </div>
 
@@ -40,9 +40,9 @@
             <label class="layui-form-label"><span class="we-red">*</span>角色</label>
             <div class="layui-form-mid layui-word-aux">
                 <span class="we-red">
-                      <c:if test="${sessionScope.user.role}=0">学生</c:if>
-                      <c:if test="${sessionScope.user.role}=1">教师</c:if>
-                      <c:if test="${sessionScope.user.role}=2">管理员</c:if>
+                      <c:if test="${sessionScope.user.role==0}">学生</c:if>
+                      <c:if test="${sessionScope.user.role==1}">教师</c:if>
+                      <c:if test="${sessionScope.user.role==2}">管理员</c:if>
                   </span>
             </div>
         </div>
@@ -109,7 +109,7 @@
                     data:data.field,
                     success: function (result) {
                         if (result.code==0) {
-                            layer.alert("增加成功", {icon: 6},function () {
+                            layer.alert("修改成功", {icon: 6},function () {
                                 // 获得frame索引
                                 var index = parent.layer.getFrameIndex(window.name);
                                 //关闭当前frame
@@ -119,7 +119,7 @@
                             });
                         }
                         else {
-
+                            layer.msg('出错');
                         }
 
                     },
