@@ -40,6 +40,7 @@
 
     <div class="layui-tab layui-tab-card site-demo-button" style="position: relative;" >
         <ul class="layui-nav layui-nav-tree layui-nav-side" style="top: 60px;">
+            <c:if test="${sessionScope.user.role==0}">
             <li class="layui-nav-item <%--layui-nav-itemed--%>">
                 <a href="javascript:;">学生</a>
                 <dl class="layui-nav-child">
@@ -51,6 +52,8 @@
                     </dd>
                 </dl>
             </li>
+            </c:if>
+            <c:if test="${sessionScope.user.role==1}">
             <li class="layui-nav-item">
                 <a href="javascript:;">教师</a>
                 <dl class="layui-nav-child">
@@ -60,6 +63,8 @@
 
                 </dl>
             </li>
+            </c:if>
+            <c:if test="${sessionScope.user.role==2}">
             <li class="layui-nav-item">
                 <a href="javascript:;">管理员</a>
                 <dl class="layui-nav-child">
@@ -72,7 +77,7 @@
 
                 </dl>
             </li>
-
+            </c:if>
         </ul>
 
         <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">
