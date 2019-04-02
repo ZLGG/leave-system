@@ -53,7 +53,7 @@
             <th lay-data="{type:'checkbox'}">ID</th>
             <th lay-data="{field:'id', width:80, sort: true}">ID</th>
             <th lay-data="{field:'beginTime', width:120, sort: true, edit: 'text'}">开始时间</th>
-            <th lay-data="{field:'endTime', minWidth: 80, width:220  edit: 'text'}">结束时间</th>
+            <th lay-data="{field:'endTime', width:120, sort: true,  edit: 'text'}">结束时间</th>
             <th lay-data="{field:'reason', width:80 , edit: 'text'}" >原因</th>
             <th lay-data="{field:'status', width:80 }">状态</th>
             <th lay-data="{field:'createTime',  minWidth: 160,width:180}">创建时间</th>
