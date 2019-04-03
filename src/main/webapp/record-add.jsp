@@ -30,7 +30,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">请假开始日期</label>
                 <div class="layui-input-inline">
-                    <input class="layui-input" id="test-limit1" type="text" placeholder="yyyy-MM-dd">
+                    <input class="layui-input" id="test-limit1" type="text" placeholder="yyyy-MM-dd HH:mm:ss">
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">请假截至日期</label>
                 <div class="layui-input-inline">
-                    <input class="layui-input" id="test-limit2" type="text" placeholder="yyyy-MM-dd">
+                    <input class="layui-input" id="test-limit2" type="text" placeholder="yyyy-MM-dd HH:mm:ss">
                 </div>
             </div>
         </div>
@@ -74,6 +74,7 @@
         var ins22 = laydate.render({
             elem: '#test-limit1'
             ,min: year+'-'+month+'-'+day
+            ,type: 'datetime'
             ,max: '2080-10-14'
             ,ready: function(){
                 ins22.hint('日期可选值设定在 <br>'+year+'-'+month+'-'+day+' 之后');
@@ -81,6 +82,7 @@
         });
         var ins23 = laydate.render({
             elem: '#test-limit2'
+            ,type: 'datetime'
             ,min: year+'-'+month+'-'+day
             //,max: '2080-10-14'
 
