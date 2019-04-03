@@ -47,7 +47,7 @@
             <th lay-data="{field:'id', width:80, sort: true}">ID</th>
             <th lay-data="{field:'number', width:120, sort: true}">学号/工号</th>
             <th lay-data="{field:'userName', width:120, sort: true, edit: 'text'}">用户名</th>
-            <th lay-data="{field:‘roleName', minWidth: 80, width:280}">角色</th>
+            <%--<th lay-data="{field:‘roleName', minWidth: 80, width:280}">角色</th>--%>
             <%--<th lay-data="{field:'class', width:120, sort: true, edit: 'text'}">班级</th>
             <th lay-data="{field:'grade', width:120, sort: true, edit: 'text'}">年级</th>--%>
             <th lay-data="{field:'phone', width:120, sort: true, edit: 'text'}">联系方式</th>

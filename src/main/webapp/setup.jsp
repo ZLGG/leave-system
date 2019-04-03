@@ -29,7 +29,7 @@
 <div class="layui-form">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">限定选课开始日期</label>
+            <label class="layui-form-label">请假开始日期</label>
             <div class="layui-input-inline">
                 <input class="layui-input" id="test-limit1" type="text" placeholder="yyyy-MM-dd">
             </div>
@@ -37,7 +37,7 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">限定选课截至日期</label>
+            <label class="layui-form-label">请假截至日期</label>
             <div class="layui-input-inline">
                 <input class="layui-input" id="test-limit2" type="text" placeholder="yyyy-MM-dd">
             </div>

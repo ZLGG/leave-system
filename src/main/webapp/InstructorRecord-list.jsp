@@ -25,8 +25,8 @@
 <body class="">
 <script type="text/html" id="barDemo">
     <%--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail"><i class="layui-icon">&#xe60a;</i></a>--%>
-    <%-- <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>--%>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">取消</i></a>
+     <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">批准</i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">拒绝</i></a>
 </script>
 <div class="x-nav">
       <span class="layui-breadcrumb">
@@ -53,17 +53,14 @@
             <th lay-data="{type:'checkbox'}">ID</th>
             <th lay-data="{field:'id', width:80, sort: true}">ID</th>
             <th lay-data="{field:'userName', width:120, sort: true}">姓名</th>
-            <th lay-data="{field:'college', width:120, sort: true}">学院</th>
-            <th lay-data="{field:'grade', width:120, sort: true}">年级</th>
             <th lay-data="{field:'class', width:120, sort: true}">班级</th>
             <th lay-data="{field:'beginTime', width:120, sort: true}">开始时间</th>
             <th lay-data="{field:'endTime', width:120, sort: true}">结束时间</th>
             <th lay-data="{field:'phone', width:120, sort: true}">联系方式</th>
             <th lay-data="{field:'reason', width:80 }" >原因</th>
-            <th lay-data="{field:'status', width:80 }">状态</th>
-            <th lay-data="{field:'auditor', width:80 }">审核人</th>
+            <%--<th lay-data="{field:'status', width:80 }">状态</th>--%>
             <th lay-data="{field:'createTime',  minWidth: 160,width:180}">创建时间</th>
-           <%-- <th lay-data="{ toolbar: '#barDemo'}">操作</th>--%>
+            <th lay-data="{ toolbar: '#barDemo'}">操作</th>
         </tr>
         </thead>
     </table>

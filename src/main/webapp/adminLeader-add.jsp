@@ -24,16 +24,16 @@
 <body>
 <div class="x-body">
     <form class="layui-form">
-       <%-- <div class="layui-form-item">
-            <label class="layui-form-label"><span class="x-red">*</span>角色</label>
-            <div class="layui-input-block" aria-required="true">
-                <input type="radio" name="role" lay-skin="primary" value="0" title="学生" checked="" required="" lay-verify="role" lay-filter="updatRole">
-                <input type="radio" name="role" lay-skin="primary" value="1" title="任课教师" lay-filter="updatRole">
-                <input type="radio" name="role" lay-skin="primary" value="2" title="辅导员" lay-filter="updatRole">
-                <input type="radio" name="role" lay-skin="primary" value="3" title="领导" lay-filter="updatRole">
-                <input type="radio" name="role" lay-skin="primary" value="4" title="管理员" lay-filter="updatRole">
-            </div>
-        </div>--%>
+        <%-- <div class="layui-form-item">
+             <label class="layui-form-label"><span class="x-red">*</span>角色</label>
+             <div class="layui-input-block" aria-required="true">
+                 <input type="radio" name="role" lay-skin="primary" value="0" title="学生" checked="" required="" lay-verify="role" lay-filter="updatRole">
+                 <input type="radio" name="role" lay-skin="primary" value="1" title="任课教师" lay-filter="updatRole">
+                 <input type="radio" name="role" lay-skin="primary" value="2" title="辅导员" lay-filter="updatRole">
+                 <input type="radio" name="role" lay-skin="primary" value="3" title="领导" lay-filter="updatRole">
+                 <input type="radio" name="role" lay-skin="primary" value="4" title="管理员" lay-filter="updatRole">
+             </div>
+         </div>--%>
         <div class="layui-form-item">
             <label for="number" class="layui-form-label">
                 <span class="x-red">*</span>学号/工号
@@ -58,7 +58,7 @@
                 <span class="x-red">*</span><%--将会成为您唯一的登入名--%>
             </div>
         </div>
-       <%-- <div class="layui-form-item" id="college1">
+        <div class="layui-form-item" id="college1">
             <label for="college" class="layui-form-label">
                 <span class="x-red">*</span>学院
             </label>
@@ -70,7 +70,7 @@
                 <span class="x-red">*</span>&lt;%&ndash;将会成为您唯一的登入名&ndash;%&gt;
             </div>
         </div>
-        <div class="layui-form-item" id="grade1">
+        <%--<div class="layui-form-item" id="grade1">
             <label for="grade" class="layui-form-label">
                 <span class="x-red">*</span>年级
             </label>
@@ -81,8 +81,8 @@
             <div class="layui-form-mid layui-word-aux">
                 <span class="x-red">*</span>&lt;%&ndash;将会成为您唯一的登入名&ndash;%&gt;
             </div>
-        </div>
-        <div class="layui-form-item" id="class1">
+        </div>--%>
+        <%-- <div class="layui-form-item" id="class1">
             <label for="class" class="layui-form-label">
                 <span class="x-red">*</span>班级
             </label>

@@ -42,8 +42,22 @@
                 <span class="we-red">
                       <c:if test="${sessionScope.user.role==0}">学生</c:if>
                       <c:if test="${sessionScope.user.role==1}">教师</c:if>
-                      <c:if test="${sessionScope.user.role==2}">管理员</c:if>
+                     <c:if test="${sessionScope.user.role==2}">辅导员</c:if>
+                     <c:if test="${sessionScope.user.role==3}">领导</c:if>
+                      <c:if test="${sessionScope.user.role==4}">管理员</c:if>
                   </span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                       autocomplete="off" class="layui-input" value="${sessionScope.user.phone}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
             </div>
         </div>
         <div class="layui-form-item" style="margin-top: 10px">

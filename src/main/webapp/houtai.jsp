@@ -40,44 +40,75 @@
 
     <div class="layui-tab layui-tab-card site-demo-button" style="position: relative;" >
         <ul class="layui-nav layui-nav-tree layui-nav-side" style="top: 60px;">
-            <c:if test="${sessionScope.user.role==0}">
+           <%-- <c:if test="${sessionScope.user.role==0}">--%>
             <li class="layui-nav-item <%--layui-nav-itemed--%>">
                 <a href="javascript:;">学生</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a data-url="/test/studentproject-list" data-id="11" data-title="选课" href="#" class="site-demo-active" data-type="tabAdd">选课</a>
+                        <a data-url="/test/studentRecord-list" data-id="11" data-title="我的请假列表" href="#" class="site-demo-active" data-type="tabAdd">我的请假列表</a>
                     </dd>
-                    <dd>
+                   <%-- <dd>
                         <a href="#" data-url="/test/studentmy-list" data-title="我的课程"  data-id="24" class="site-demo-active" data-type="tabAdd">我的课程</a>
-                    </dd>
+                    </dd>--%>
                 </dl>
             </li>
-            </c:if>
-            <c:if test="${sessionScope.user.role==1}">
+            <%--</c:if>
+            <c:if test="${sessionScope.user.role==1}">--%>
             <li class="layui-nav-item">
                 <a href="javascript:;">教师</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a data-url="/test/teachproject-list" data-id="12" data-title="我的课程" href="#" class="site-demo-active" data-type="tabAdd">我的课程</a>
+                        <a data-url="/test/teacherRecord-list" data-id="12" data-title="请假记录" href="#" class="site-demo-active" data-type="tabAdd">请假记录</a>
                     </dd>
 
                 </dl>
             </li>
-            </c:if>
-            <c:if test="${sessionScope.user.role==2}">
+            <%--</c:if>--%>
+            <li class="layui-nav-item">
+                <a href="javascript:;">辅导员</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a data-url="/test/InstructorRecord-list" data-id="14" data-title="待审批" href="#" class="site-demo-active" data-type="tabAdd">待审批</a>
+                    </dd>
+                    <dd>
+                        <a data-url="/test/teacherRecord-list" data-id="13" data-title="已审批" href="#" class="site-demo-active" data-type="tabAdd">已审批</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">领导</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a data-url="/test/leaderRecord-list" data-id="15" data-title="待审批" href="#" class="site-demo-active" data-type="tabAdd">待审批</a>
+                    </dd>
+                    <dd>
+                        <a data-url="/test/teacherRecord-list" data-id="16" data-title="已审批" href="#" class="site-demo-active" data-type="tabAdd">已审批</a>
+                    </dd>
+                </dl>
+            </li>
+           <%-- <c:if test="${sessionScope.user.role==2}">--%>
             <li class="layui-nav-item">
                 <a href="javascript:;">管理员</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a data-url="/test/admin-list" data-id="28" data-title="用户列表" href="#" class="site-demo-active" data-type="tabAdd">用户列表</a>
+                        <a data-url="/test/admin-list" data-id="28" data-title="学生用户" href="#" class="site-demo-active" data-type="tabAdd">学生用户</a>
                     </dd>
                     <dd>
-                        <a href="#" data-url="/test/project-list" data-title="课程列表"  data-id="22" class="site-demo-active" data-type="tabAdd">课程列表</a>
+                        <a href="#" data-url="/test/adminTeacher-list" data-title="教师用户"  data-id="31" class="site-demo-active" data-type="tabAdd">教师用户</a>
+                    </dd>
+                    <dd>
+                        <a href="#" data-url="/test/adminInstructor-list" data-title="辅导员用户"  data-id="32" class="site-demo-active" data-type="tabAdd">辅导员用户</a>
+                    </dd>
+                    <dd>
+                        <a href="#" data-url="/test/adminLeader-list" data-title="领导用户"  data-id="33" class="site-demo-active" data-type="tabAdd">领导用户</a>
+                    </dd>
+                    <dd>
+                        <a href="#" data-url="/test/admin-list" data-title="管理员用户"  data-id="34" class="site-demo-active" data-type="tabAdd">管理员用户</a>
                     </dd>
 
                 </dl>
             </li>
-            </c:if>
+           <%-- </c:if>--%>
         </ul>
 
         <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">

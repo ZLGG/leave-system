@@ -25,8 +25,8 @@
 <body class="">
 <script type="text/html" id="barDemo">
     <%--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail"><i class="layui-icon">&#xe60a;</i></a>--%>
-    <%-- <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>--%>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">取消</i></a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">销假</i></a>
 </script>
 <div class="x-nav">
       <span class="layui-breadcrumb">
