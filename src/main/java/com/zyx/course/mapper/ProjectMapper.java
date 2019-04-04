@@ -22,8 +22,8 @@ public interface ProjectMapper {
     @Insert("insert into project_teacher (teacherId,project,score,createTime) values(#{eo.teacherId},#{eo.project},#{eo.score},now())")
     void insertProject(@Param("eo")DataVo eo);
 
-    @Select("select t.project,t.score,p.createTime,p.id,u1.userName,p.ispass from project_student p,user u,project_teacher t,user u1 where p.userId = u.id and p.projectId = t.id and u1.id = t.teacherId and u.id = #{id} and p.dr=0")
-    List<DataVo> selectStudentProject(@Param("id") Integer id);
+    @Select("select t.project,t.score,p.createTime,p.id,u1.userName,p.ispass from project_student p,user u,project_teacher t,user u1 where p.userId = u.id and p.projectId = t.id and u1.id = t.teacherId and u.id = #{id} and p.dr=0 limit #{page},#{limit};")
+    List<DataVo> selectStudentProject(@Param("id") Integer id,@Param("page") Integer page,@Param("limit")Integer limit);
 
     @Update("update project_teacher set dr=1 and id=#{id}")
     void deleteProject(@Param("id") Integer id);

@@ -130,7 +130,7 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
+        © 选课系统
     </div>
 </div>
 <script src="/static/layui/layui.js"></script>

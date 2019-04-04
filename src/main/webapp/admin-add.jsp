@@ -178,6 +178,7 @@
         //监听提交
         form.on('submit(add)', function (data) {
             console.log(data);
+<<<<<<< Updated upstream
             $.ajax(
                 {
                     type: 'get',
@@ -198,6 +199,37 @@
                         else {
                             layer.msg('异常');
                         }
+=======
+              $.ajax(
+                  {
+                      type:'get',
+                      url:'/addUser',
+                      datatype:"json",
+                      data:data.field,
+                      success: function (result) {
+                          if (result.code==200) {
+                              layer.alert("增加成功", {icon: 6},function () {
+                                  // 获得frame索引
+                                  var index = parent.layer.getFrameIndex(window.name);
+                                  //关闭当前frame
+                                  parent.layer.close(index);
+                                  // 可以对父窗口进行刷新
+                                  x_admin_father_reload();
+                              });
+                          }else if (result.code == 1) {
+                              layer.alert("添加失败，学号已经存在", {icon: 6},function () {
+                                  // 获得frame索引
+                                  var index = parent.layer.getFrameIndex(window.name);
+                                  //关闭当前frame
+                                  parent.layer.close(index);
+                                  // 可以对父窗口进行刷新
+                                  x_admin_father_reload();
+                              });
+                          }
+                          else {
+                              layer.msg('出错');
+                          }
+>>>>>>> Stashed changes
 
                     },
                     error: function () {

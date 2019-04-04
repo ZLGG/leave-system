@@ -53,4 +53,7 @@ public interface UserMapper {
 
     @Select("select * from user where role=1")
     List<DataVo> getTeacher();
+
+    @Select("select * from user u where u.dr = 0 and u.number = #{number}")
+    UserEo selectUserByNumber(@Param("number")String number);
 }

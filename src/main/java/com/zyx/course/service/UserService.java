@@ -57,6 +57,9 @@ public class UserService {
 
     }
 
+    public UserEo selectUserByNumber(String number) {
+        return UserMapper.selectUserByNumber(number);
+    }
 
 
 }

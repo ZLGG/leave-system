@@ -130,6 +130,10 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/addUser")
     public Result addUser(UserEo DataVo) {
+        UserEo userEo = UserService.selectUserByNumber(DataVo.getNumber());
+        if (userEo != null) {
+            return new Result(1, "", "");
+        }
         UserService.insertUser(DataVo);
         return new Result(200, "", "");
     }

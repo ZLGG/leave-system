@@ -38,10 +38,10 @@ public class ProjectController {
 
     @ResponseBody
     @RequestMapping("/selectStudentProject")
-    public Result selectStudentProject(String page,String limit,HttpSession session) {
+    public Result selectStudentProject(Integer page,Integer limit,HttpSession session) {
         UserEo user = (UserEo) session.getAttribute("user");
-        List<DataVo> dataVos = ProjectService.selectStudentProject(user.getId());
-        for (DataVo vo : dataVos) {
+        Result result = ProjectService.selectStudentProject(user.getId(),page,limit);
+        for (DataVo vo : (List<DataVo>)result.getData()) {
             if (vo.getIspass()==0) {
                 vo.setIspassName("及格");
             } else if (vo.getIspass() == 1) {
@@ -50,7 +50,7 @@ public class ProjectController {
                 vo.setIspassName("未出");
             }
         }
-        return new Result(0, "", dataVos, 100);
+        return result;
     }
 
     @ResponseBody
@@ -83,17 +83,17 @@ public class ProjectController {
 
     @ResponseBody
     @RequestMapping("/choiceProject")
-    public Result choiceProject(Integer id, HttpSession session) {
+    public Result choiceProject(Integer id, HttpSession session,Integer page,Integer limit) {
         UserEo user = (UserEo) session.getAttribute("user");
         ProjectStudent projectStudent = new ProjectStudent();
         projectStudent.setProjectId(id);
         projectStudent.setUserId(user.getId());
         ProjectStudent projectStudent1 = ProjectService.selectProjectStudent(projectStudent);
-        List<DataVo> dataVos = ProjectService.selectStudentProject(user.getId());
+        Result result = ProjectService.selectStudentProject(user.getId(), page, limit);
         if (projectStudent1 != null) {
             return new Result(1,"","");
         }
-        if (dataVos.size() >= 2) {
+        if (((List<DataVo>)result.getData()).size() >= 2) {
             return new Result(2,"","");
         }
         ProjectService.insertprojectStudent(projectStudent);
