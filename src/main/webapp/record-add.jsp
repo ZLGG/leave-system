@@ -30,7 +30,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">请假开始日期</label>
                 <div class="layui-input-inline">
-                    <input class="layui-input" id="test-limit1" type="text" placeholder="yyyy-MM-dd HH:mm:ss">
+                    <input class="layui-input" id="beginTime" name="beginTime" type="text" placeholder="yyyy-MM-dd HH:mm:ss">
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">请假截至日期</label>
                 <div class="layui-input-inline">
-                    <input class="layui-input" id="test-limit2" type="text" placeholder="yyyy-MM-dd HH:mm:ss">
+                    <input class="layui-input" id="endTime" name="endTime" type="text" placeholder="yyyy-MM-dd HH:mm:ss">
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
         var month = myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
         var day = myDate.getDate(); //获取当前日(1-31)
         var ins22 = laydate.render({
-            elem: '#test-limit1'
+            elem: '#beginTime'
             ,min: year+'-'+month+'-'+day
             ,type: 'datetime'
             ,max: '2080-10-14'
@@ -81,7 +81,7 @@
             }
         });
         var ins23 = laydate.render({
-            elem: '#test-limit2'
+            elem: '#endTime'
             ,type: 'datetime'
             ,min: year+'-'+month+'-'+day
             //,max: '2080-10-14'
@@ -95,11 +95,11 @@
             $.ajax(
                 {
                     type: 'get',
-                    url: '/addUser',
+                    url: '/addRecord',
                     datatype: "json",
                     data: data.field,
                     success: function (result) {
-                        if (result.code == 200) {
+                        if (result.code == 0) {
                             layer.alert("增加成功", {icon: 6}, function () {
                                 // 获得frame索引
                                 var index = parent.layer.getFrameIndex(window.name);
@@ -110,7 +110,12 @@
                             });
                         }
                         else {
-                            layer.msg('异常');
+                            layer.msg('时间不匹配');
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            // 可以对父窗口进行刷新
+                            x_admin_father_reload();
                         }
 
                     },

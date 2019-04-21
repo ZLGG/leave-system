@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>选课系统</title>
+    <title>请销假系统</title>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <link rel="stylesheet" href="/static/js/admin.js">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">选课管理系统</div>
+    <div class="layui-header" style="background: #2F4056">
+        <div class="layui-logo">请销假管理系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -39,8 +39,8 @@
 
 
     <div class="layui-tab layui-tab-card site-demo-button" style="position: relative;" >
-        <ul class="layui-nav layui-nav-tree layui-nav-side" style="top: 60px;">
-           <%-- <c:if test="${sessionScope.user.role==0}">--%>
+        <ul class="layui-nav layui-nav-tree layui-nav-side" style="top: 60px;background: #2F4056">
+            <c:if test="${sessionScope.user.role==0}">
             <li class="layui-nav-item <%--layui-nav-itemed--%>">
                 <a href="javascript:;">学生</a>
                 <dl class="layui-nav-child">
@@ -52,8 +52,9 @@
                     </dd>--%>
                 </dl>
             </li>
-            <%--</c:if>
-            <c:if test="${sessionScope.user.role==1}">--%>
+            </c:if>
+
+            <c:if test="${sessionScope.user.role==1}">
             <li class="layui-nav-item">
                 <a href="javascript:;">教师</a>
                 <dl class="layui-nav-child">
@@ -63,7 +64,9 @@
 
                 </dl>
             </li>
-            <%--</c:if>--%>
+            </c:if>
+
+            <c:if test="${sessionScope.user.role==2}">
             <li class="layui-nav-item">
                 <a href="javascript:;">辅导员</a>
                 <dl class="layui-nav-child">
@@ -75,6 +78,9 @@
                     </dd>
                 </dl>
             </li>
+            </c:if>
+
+            <c:if test="${sessionScope.user.role==3}">
             <li class="layui-nav-item">
                 <a href="javascript:;">领导</a>
                 <dl class="layui-nav-child">
@@ -86,12 +92,14 @@
                     </dd>
                 </dl>
             </li>
-           <%-- <c:if test="${sessionScope.user.role==2}">--%>
+            </c:if>
+
+            <c:if test="${sessionScope.user.role==4}">
             <li class="layui-nav-item">
                 <a href="javascript:;">管理员</a>
                 <dl class="layui-nav-child">
                     <dd>
-                        <a data-url="/test/admin-list" data-id="28" data-title="学生用户" href="#" class="site-demo-active" data-type="tabAdd">学生用户</a>
+                        <a data-url="/test/adminStudent-list" data-id="28" data-title="学生用户" href="#" class="site-demo-active" data-type="tabAdd">学生用户</a>
                     </dd>
                     <dd>
                         <a href="#" data-url="/test/adminTeacher-list" data-title="教师用户"  data-id="31" class="site-demo-active" data-type="tabAdd">教师用户</a>
@@ -108,7 +116,7 @@
 
                 </dl>
             </li>
-           <%-- </c:if>--%>
+            </c:if>
         </ul>
 
         <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">
@@ -130,7 +138,7 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © 选课系统
+        © 请销假管理系统
     </div>
 </div>
 <script src="/static/layui/layui.js"></script>

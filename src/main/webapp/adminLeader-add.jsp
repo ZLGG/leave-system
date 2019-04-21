@@ -67,7 +67,7 @@
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>&lt;%&ndash;将会成为您唯一的登入名&ndash;%&gt;
+                <span class="x-red">*</span>
             </div>
         </div>
         <%--<div class="layui-form-item" id="grade1">
@@ -164,7 +164,7 @@
         form.verify({
             nikename: function (value) {
                 if (value.length < 11) {
-                    return '学号/工号至少得11个字符啊';
+                    return '工号至少得11个字符啊';
                 }
             }
             , pass: [/(.+){6,12}$/, '密码必须6到12位']
@@ -181,12 +181,12 @@
             $.ajax(
                 {
                     type: 'get',
-                    url: '/addUser',
+                    url: '/addLeaderUser',
                     datatype: "json",
                     data: data.field,
                     success: function (result) {
-                        if (result.code == 200) {
-                            layer.alert("增加成功", {icon: 6}, function () {
+                        if (result.code == 0) {
+                            layer.alert("添加成功", {icon: 6}, function () {
                                 // 获得frame索引
                                 var index = parent.layer.getFrameIndex(window.name);
                                 //关闭当前frame
@@ -194,6 +194,9 @@
                                 // 可以对父窗口进行刷新
                                 x_admin_father_reload();
                             });
+                        }
+                        else if (result.code == -1) {
+                            layer.msg("工号已存在");
                         }
                         else {
                             layer.msg('异常');

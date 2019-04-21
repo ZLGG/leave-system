@@ -26,7 +26,7 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label  class="layui-form-label">
-                <span class="we-red">*</span>学号
+                <span class="we-red">*</span>学号/工号
             </label>
             <div class="layui-form-mid layui-word-aux">
                 <span class="we-red">${sessionScope.user.number}</span>

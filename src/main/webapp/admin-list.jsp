@@ -40,12 +40,12 @@
 </div>
 <div class="x-body">
 
-    <table class="layui-table" lay-data="{url:'/getUserList',page:true,toolbar: 'default',id:'test'}" lay-filter="test">
+    <table class="layui-table" lay-data="{url:'/getAdminList',page:true,toolbar: 'default',id:'test'}" lay-filter="test">
         <thead>
         <tr>
             <th lay-data="{type:'checkbox'}">ID</th>
             <th lay-data="{field:'id', width:80, sort: true}">ID</th>
-            <th lay-data="{field:'number', width:120, sort: true}">学号/工号</th>
+            <th lay-data="{field:'number', width:120, sort: true}">工号</th>
             <th lay-data="{field:'userName', width:120, sort: true, edit: 'text'}">用户名</th>
             <%--<th lay-data="{field:‘roleName', minWidth: 80, width:280}">角色</th>--%>
             <%--<th lay-data="{field:'class', width:120, sort: true, edit: 'text'}">班级</th>
@@ -282,7 +282,7 @@
                 // x_admin_show('商城首页','/test/index');
                 testShow()
             } else if(layEvent === 'del'){
-                layer.confirm('真的删除行么', function(index){
+                layer.confirm('确认删除？', function(index){
                     obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
                     //向服务端发送删除指令
@@ -294,10 +294,10 @@
                             data:{id:obj.data.id},
                             success: function (result) {
                                 if (result.code==0) {
-
+                                    layer.msg("成功删除");
                                 }
                                 else {
-
+                                    layer.msg("操作有误");
                                 }
 
                             },

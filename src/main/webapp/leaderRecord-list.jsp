@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>课程列表</title>
+    <title>请假列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -47,20 +47,20 @@
           <button class="layui-btn"  lay-submit="" lay-filter="search"><i class="layui-icon">设置</i></button>
         </form>
       </div>--%>
-    <table class="layui-table" lay-data="{url:'/getProject',page:true,id:'test',toolbar: 'default'}" lay-filter="test">
+    <table class="layui-table" lay-data="{url:'/getLeaderRecordList',page:true,id:'test',toolbar: ''}" lay-filter="test">
         <thead>
         <tr>
             <th lay-data="{type:'checkbox'}">ID</th>
-            <th lay-data="{field:'id', width:80, sort: true}">ID</th>
+            <th lay-data="{field:'id', width:60, sort: true}">ID</th>
             <th lay-data="{field:'userName', width:120, sort: true}">姓名</th>
-            <th lay-data="{field:'grade', width:120, sort: true}">年级</th>
-            <th lay-data="{field:'class', width:120, sort: true}">班级</th>
-            <th lay-data="{field:'beginTime', width:120, sort: true}">开始时间</th>
-            <th lay-data="{field:'endTime', width:120, sort: true}">结束时间</th>
+            <th lay-data="{field:'grade', width:80, sort: true}">年级</th>
+            <th lay-data="{field:'clas', width:80, sort: true}">班级</th>
+            <th lay-data="{field:'beginTime', width:160, sort: true}">开始时间</th>
+            <th lay-data="{field:'endTime', width:160, sort: true}">结束时间</th>
             <th lay-data="{field:'phone', width:120, sort: true}">联系方式</th>
-            <th lay-data="{field:'reason', width:80 }" >原因</th>
+            <th lay-data="{field:'reason', width:120 }" >原因</th>
             <%--<th lay-data="{field:'status', width:80 }">状态</th>--%>
-            <th lay-data="{field:'createTime',  minWidth: 160,width:180}">创建时间</th>
+            <th lay-data="{field:'createTime',  minWidth: 160,width:160}">创建时间</th>
             <th lay-data="{ toolbar: '#barDemo'}">操作</th>
         </tr>
         </thead>
@@ -106,7 +106,7 @@
     layui.use(['table','form'], function(){
         var table = layui.table;
         var form = layui.form;
-        $.ajax(
+       /* $.ajax(
             {
                 type:'get',
                 url:'/getTeacher',
@@ -125,7 +125,7 @@
                     layer.msg('异常');
                 }
             }
-        );
+        );*/
         //监听提交
         form.on('submit(search)', function(data){
             console.log(data);
@@ -312,28 +312,26 @@
             if(layEvent === 'detail'){
 
                 //layer.msg('查看操作'+obj.data.ciurPic);
-                /*$.ajax(
+                $.ajax(
                     {
-                        type: "post",
-                        url: "/ajaxtest",
+                        type: "get",
+                        url: "/adoptRecord",
                         datatype: "json",
-                        data:obj.data.field,
+                        data:{id:obj.data.id},
                         success:function (data1) {
-                            if (data1.result=='SUCCESS') {
-                                setTimeout(function () {
-                                    window.location.href = "/index.jsp";
-                                },1000)
+                            if (data1.result==0) {
+                                layer.msg("批准成功");
                             }
                             else {
                                 lay.msg(data1.errorMsg,{time: 1000});
                             }
                         },
                         error:function () {
-                            layer.msg("yichang");
+                            layer.msg("异常");
                         }
 
                     }
-                );*/
+                );
                 /* layer.open({
                      type: 2,
                      area: [($(window).width()*0.9)+'px', ($(window).height() - 50) +'px'],
@@ -357,23 +355,23 @@
                      }
                  });*/
                 // x_admin_show('商城首页','/test/index');
-                testShow()
             } else if(layEvent === 'del'){
-                layer.confirm('真的删除行么', function(index){
+                layer.confirm('确认拒绝？', function(index){
                     obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax(
                         {
                             type:'get',
-                            url:'/cancelRecord',
+                            url:'/refuseRecord',
                             datatype:"json",
                             data:{id:obj.data.id},
                             success: function (result) {
-                                if (result.code=200) {
-
+                                if (result.code==0) {
+                                    layer.msg("成功拒绝");
                                 }
                                 else {
+                                    layer.msg("操作失败");
 
                                 }
 
@@ -386,30 +384,33 @@
 
                 });
             } else if(layEvent === 'edit'){
-                layer.msg('删除重新添加',{time:1000});
-                /* layer.msg('编辑操作');
-                 layer.open({
-                     type: 2,
-                     area: [($(window).width() * 0.9) + 'px', ($(window).height() - 50) + 'px'],
-                     fix: false, //不固定
-                     maxmin: true,
-                     shadeClose: true,
-                     shade: 0.4,
-                     title: "编辑",
-                     content: '/test/item-edit',
-                     success: function () {
-                         //窗口加载成功刷新frame
-                         // location.replace(location.href);
-                     },
-                     cancel: function () {
-                         //关闭窗口之后刷新frame
-                         // location.replace(location.href);
-                     },
-                     end: function () {
-                         //窗口销毁之后刷新frame
-                         // location.replace(location.href);
-                     }
-                 });*/
+                layer.confirm('确认批准？', function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.ajax(
+                        {
+                            type:'get',
+                            url:'/adoptRecord',
+                            datatype:"json",
+                            data:{id:obj.data.id},
+                            success: function (result) {
+                                if (result.code==0) {
+                                    layer.msg("成功审批");
+                                }
+                                else {
+                                    layer.msg("操作失败");
+
+                                }
+
+                            },
+                            error:function () {
+                                layer.msg('异常');
+                            }
+                        }
+                    );
+
+                });
             }
         });
 

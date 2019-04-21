@@ -36,7 +36,7 @@
          </div>--%>
         <div class="layui-form-item">
             <label for="number" class="layui-form-label">
-                <span class="x-red">*</span>学号/工号
+                <span class="x-red">*</span>学号
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="number" name="number" required="" lay-verify="required"
@@ -67,7 +67,7 @@
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>&lt;%&ndash;将会成为您唯一的登入名&ndash;%&gt;
+                <span class="x-red">*</span>
             </div>
         </div>
         <div class="layui-form-item" id="grade1">
@@ -79,15 +79,15 @@
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>&lt;%&ndash;将会成为您唯一的登入名&ndash;%&gt;
+                <span class="x-red">*</span>
             </div>
         </div>
          <div class="layui-form-item" id="class1">
-            <label for="class" class="layui-form-label">
+            <label for="clas" class="layui-form-label">
                 <span class="x-red">*</span>班级
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="class" name="class" required="" lay-verify="required"
+                <input type="text" id="clas" name="clas" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -163,8 +163,8 @@
         //自定义验证规则
         form.verify({
             nikename: function (value) {
-                if (value.length < 11) {
-                    return '学号/工号至少得11个字符啊';
+                if (value.length != 11) {
+                    return '学号必须得11个字符';
                 }
             }
             , pass: [/(.+){6,12}$/, '密码必须6到12位']
@@ -181,11 +181,11 @@
             $.ajax(
                 {
                     type: 'get',
-                    url: '/addUser',
+                    url: '/insertStudent',
                     datatype: "json",
                     data: data.field,
                     success: function (result) {
-                        if (result.code == 200) {
+                        if (result.code == 0) {
                             layer.alert("增加成功", {icon: 6}, function () {
                                 // 获得frame索引
                                 var index = parent.layer.getFrameIndex(window.name);
@@ -194,6 +194,9 @@
                                 // 可以对父窗口进行刷新
                                 x_admin_father_reload();
                             });
+                        }
+                        else if (result.code == -1) {
+                            layer.msg("该学号已经存在");
                         }
                         else {
                             layer.msg('异常');

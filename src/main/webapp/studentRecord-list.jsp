@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>课程列表</title>
+    <title>请假列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -47,15 +47,15 @@
           <button class="layui-btn"  lay-submit="" lay-filter="search"><i class="layui-icon">设置</i></button>
         </form>
       </div>--%>
-    <table class="layui-table" lay-data="{url:'/getProject',page:true,id:'test',toolbar: 'default'}" lay-filter="test">
+    <table class="layui-table" lay-data="{url:'/studentSelectRecord',page:true,id:'test',toolbar: 'default'}" lay-filter="test">
         <thead>
         <tr>
             <th lay-data="{type:'checkbox'}">ID</th>
             <th lay-data="{field:'id', width:80, sort: true}">ID</th>
-            <th lay-data="{field:'beginTime', width:120, sort: true, edit: 'text'}">开始时间</th>
-            <th lay-data="{field:'endTime', width:120, sort: true,  edit: 'text'}">结束时间</th>
-            <th lay-data="{field:'reason', width:80 , edit: 'text'}" >原因</th>
-            <th lay-data="{field:'status', width:80 }">状态</th>
+            <th lay-data="{field:'beginTime', width:160, sort: true, edit: 'text'}">开始时间</th>
+            <th lay-data="{field:'endTime', width:160, sort: true,  edit: 'text'}">结束时间</th>
+            <th lay-data="{field:'reason', width:280 , edit: 'text'}" >原因</th>
+            <th lay-data="{field:'statusName', width:80 }">状态</th>
             <th lay-data="{field:'createTime',  minWidth: 160,width:180}">创建时间</th>
             <th lay-data="{ toolbar: '#barDemo'}">操作</th>
         </tr>
@@ -102,7 +102,7 @@
     layui.use(['table','form'], function(){
         var table = layui.table;
         var form = layui.form;
-        $.ajax(
+       /* $.ajax(
             {
                 type:'get',
                 url:'/getTeacher',
@@ -121,7 +121,7 @@
                     layer.msg('异常');
                 }
             }
-        );
+        );*/
         //监听提交
         form.on('submit(search)', function(data){
             console.log(data);
@@ -355,8 +355,7 @@
                 // x_admin_show('商城首页','/test/index');
                 testShow()
             } else if(layEvent === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del(); //删除对应行（tr）的DOM结构
+                layer.confirm('确定取消', function(index){
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax(
@@ -366,11 +365,12 @@
                             datatype:"json",
                             data:{id:obj.data.id},
                             success: function (result) {
-                                if (result.code=200) {
-
+                                if (result.code==0) {
+                                    obj.del(); //删除对应行（tr）的DOM结构
+                                    layer.msg("取消成功");
                                 }
                                 else {
-
+                                    layer.msg("不能取消");
                                 }
 
                             },
@@ -382,30 +382,39 @@
 
                 });
             } else if(layEvent === 'edit'){
-                layer.msg('删除重新添加',{time:1000});
-                /* layer.msg('编辑操作');
-                 layer.open({
-                     type: 2,
-                     area: [($(window).width() * 0.9) + 'px', ($(window).height() - 50) + 'px'],
-                     fix: false, //不固定
-                     maxmin: true,
-                     shadeClose: true,
-                     shade: 0.4,
-                     title: "编辑",
-                     content: '/test/item-edit',
-                     success: function () {
-                         //窗口加载成功刷新frame
-                         // location.replace(location.href);
-                     },
-                     cancel: function () {
-                         //关闭窗口之后刷新frame
-                         // location.replace(location.href);
-                     },
-                     end: function () {
-                         //窗口销毁之后刷新frame
-                         // location.replace(location.href);
-                     }
-                 });*/
+                /*layer.msg('删除重新添加',{time:1000});*/
+                $.ajax(
+                    {
+                        type:'get',
+                        url:'/xiaoJiaRecord',
+                        datatype:"json",
+                        data:{id:obj.data.id},
+                        success: function (result) {
+                            if (result.code==3) {
+                                layer.msg("销假成功");
+                                //obj.del(); //删除对应行（tr）的DOM结构
+                                setTimeout(function () {
+                                    window.location.replace(location.href);
+                                },500);
+
+
+                            }
+                            else if (result.code == 0) {
+                                layer.msg("待批准");
+                            }else if (result.code==1) {
+                                layer.msg("已销假");
+                            }
+                            else {
+                                layer.msg("已拒绝");
+                            }
+
+                        },
+                        error:function () {
+                            layer.msg('异常');
+                        }
+                    }
+                );
+
             }
         });
 

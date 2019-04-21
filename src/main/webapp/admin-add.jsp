@@ -164,7 +164,7 @@
         form.verify({
             nikename: function (value) {
                 if (value.length < 11) {
-                    return '学号/工号至少得11个字符啊';
+                    return '工号至少得11个字符啊';
                 }
             }
             , pass: [/(.+){6,12}$/, '密码必须6到12位']
@@ -178,16 +178,15 @@
         //监听提交
         form.on('submit(add)', function (data) {
             console.log(data);
-<<<<<<< Updated upstream
             $.ajax(
                 {
                     type: 'get',
-                    url: '/addUser',
+                    url: '/addAdminUser',
                     datatype: "json",
                     data: data.field,
                     success: function (result) {
-                        if (result.code == 200) {
-                            layer.alert("增加成功", {icon: 6}, function () {
+                        if (result.code == 0) {
+                            layer.alert("添加成功", {icon: 6}, function () {
                                 // 获得frame索引
                                 var index = parent.layer.getFrameIndex(window.name);
                                 //关闭当前frame
@@ -196,41 +195,12 @@
                                 x_admin_father_reload();
                             });
                         }
+                        else if (result.code == -1) {
+                            layer.msg("工号已经存在");
+                        }
                         else {
                             layer.msg('异常');
                         }
-=======
-              $.ajax(
-                  {
-                      type:'get',
-                      url:'/addUser',
-                      datatype:"json",
-                      data:data.field,
-                      success: function (result) {
-                          if (result.code==200) {
-                              layer.alert("增加成功", {icon: 6},function () {
-                                  // 获得frame索引
-                                  var index = parent.layer.getFrameIndex(window.name);
-                                  //关闭当前frame
-                                  parent.layer.close(index);
-                                  // 可以对父窗口进行刷新
-                                  x_admin_father_reload();
-                              });
-                          }else if (result.code == 1) {
-                              layer.alert("添加失败，学号已经存在", {icon: 6},function () {
-                                  // 获得frame索引
-                                  var index = parent.layer.getFrameIndex(window.name);
-                                  //关闭当前frame
-                                  parent.layer.close(index);
-                                  // 可以对父窗口进行刷新
-                                  x_admin_father_reload();
-                              });
-                          }
-                          else {
-                              layer.msg('出错');
-                          }
->>>>>>> Stashed changes
-
                     },
                     error: function () {
                         layer.msg('异常');
