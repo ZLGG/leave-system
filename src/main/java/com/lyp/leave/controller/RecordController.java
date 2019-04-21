@@ -34,6 +34,13 @@ public class RecordController {
         session.setAttribute("user", userEo);
         return "success";
     }
+
+    /**
+     * 请假
+     * @param RecordEo
+     * @return
+     * @throws Exception
+     */
     @ResponseBody
     @RequestMapping("/addRecord")
     public Result addRecord(RecordEo RecordEo) throws Exception{
@@ -51,6 +58,15 @@ public class RecordController {
         RecordService.insertRecord(RecordEo);
         return new Result(0,"","");
     }
+
+    /**
+     * 学生请假列表
+     * @param id
+     * @param page
+     * @param limit
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/studentSelectRecord")
     public Result studentSelectRecord(Integer id, Integer page, Integer limit, HttpSession session) {
@@ -72,6 +88,11 @@ public class RecordController {
         return result;
     }
 
+    /**
+     * 取消请假
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/cancelRecord")
     public Result cancelRecord(Integer id) {
@@ -83,6 +104,11 @@ public class RecordController {
         return new Result(0,"","");
     }
 
+    /**
+     * 销假
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/xiaoJiaRecord")
     public Result xiaojia(Integer id) {
@@ -99,6 +125,13 @@ public class RecordController {
         }
     }
 
+    /**
+     * 辅导员查看请假列表
+     * @param session
+     * @param page
+     * @param limit
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getInstructorRecordList")
     public Result getInstructorRecordList(HttpSession session,
@@ -109,6 +142,12 @@ public class RecordController {
         return result;
     }
 
+    /**
+     * 拒绝请假
+     * @param id
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/refuseRecord")
     public Result refuseRecord(Integer id,HttpSession session) {
@@ -117,6 +156,12 @@ public class RecordController {
         return new Result(0,"","");
     }
 
+    /**
+     * 批准请假
+     * @param id
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/adoptRecord")
     public Result adoptRecord(Integer id, HttpSession session) {
@@ -125,6 +170,13 @@ public class RecordController {
         return new Result(0, "", "");
     }
 
+    /**
+     * 领导查看请假列表
+     * @param page
+     * @param limit
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getLeaderRecordList")
     public Result leaderSelectRecord(Integer page, Integer limit, HttpSession session) {

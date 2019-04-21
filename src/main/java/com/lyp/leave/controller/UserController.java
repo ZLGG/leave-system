@@ -15,7 +15,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
+    /**
+     * 添加学生
+     * @param userEo
+     * @return
+     */
     @RequestMapping("/insertStudent")
     public Result insertStudent(UserEo userEo) {
         UserEo userEo1 = userService.selectUserById(userEo.getNumber());
@@ -26,30 +30,64 @@ public class UserController {
         return new Result(0, "", "");
     }
 
+    /**
+     * 学生用户列表
+     * @param page
+     * @param limit
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getStudentList")
     public Result getStudentList(Integer page, Integer limit) {
         Result result = userService.selectUserList(0, page, limit);
         return result;
     }
+
+    /**
+     * 教师用户列表
+     * @param page
+     * @param limit
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getTeacherList")
     public Result getTeacherList(Integer page, Integer limit) {
         Result result = userService.selectUserList(1, page, limit);
         return result;
     }
+
+    /**
+     * 辅导员用户列表
+     * @param page
+     * @param limit
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getInstructorList")
     public Result getInstructorList(Integer page, Integer limit) {
         Result result = userService.selectUserList(2, page, limit);
         return result;
     }
+
+    /**
+     * 领导用户列表
+     * @param page
+     * @param limit
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getLeaderList")
     public Result getLeaderList(Integer page, Integer limit) {
         Result result = userService.selectUserList(3, page, limit);
         return result;
     }
+
+    /**
+     * 管理员用户列表
+     * @param page
+     * @param limit
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getAdminList")
     public Result getAdminList(Integer page, Integer limit) {
@@ -57,6 +95,11 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 添加教师用户
+     * @param userEo
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/addTeacherUser")
     public Result addTeacherUser(UserEo userEo) {
@@ -68,6 +111,12 @@ public class UserController {
         userService.addUser(userEo);
         return new Result(0, "", "");
     }
+
+    /**
+     * 添加管理员用户
+     * @param userEo
+     * @return
+     */
     @RequestMapping("/addAdminUser")
     public Result addAdminUser(UserEo userEo) {
         UserEo userEo1 = userService.selectUserById(userEo.getNumber().trim());
@@ -79,6 +128,11 @@ public class UserController {
         return new Result(0, "", "");
     }
 
+    /**
+     * 添加辅导员用户
+     * @param userEo
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/addInstructorUser")
     public Result addInstructorUser(UserEo userEo) {
@@ -89,6 +143,12 @@ public class UserController {
         userService.addInstructorUser(userEo);
         return new Result(0, "", "");
     }
+
+    /**
+     * 添加领导用户
+     * @param userEo
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/addLeaderUser")
     public Result addLeaderUser(UserEo userEo) {
@@ -100,6 +160,11 @@ public class UserController {
         return new Result(0, "", "");
     }
 
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/deleteUser")
     public Result deleteUser(Integer id) {
@@ -107,7 +172,12 @@ public class UserController {
         return new Result(0, "", "");
     }
 
-
+    /**
+     * 更新用户信息
+     * @param userEo
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/updateUser")
     public Result updateUser(UserEo userEo,HttpSession session) {
@@ -118,6 +188,12 @@ public class UserController {
         return new Result(0, "", "");
     }
 
+    /**
+     * 登录
+     * @param userEo
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/login")
     public Result login(UserEo userEo, HttpSession session) {
