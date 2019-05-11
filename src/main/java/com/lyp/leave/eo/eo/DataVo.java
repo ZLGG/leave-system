@@ -1,6 +1,7 @@
 package com.lyp.leave.eo.eo;
 
 import lombok.Data;
+import org.apache.ibatis.annotations.Select;
 
 @Data
 public class DataVo {
@@ -11,6 +12,7 @@ public class DataVo {
     private String updateTime;
     private String createTime;
     private Integer auditorId;
+    private String auditorIdName;
     private Integer status;
     private Integer day;
     private String statusName;

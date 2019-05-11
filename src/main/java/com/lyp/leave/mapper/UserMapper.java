@@ -39,4 +39,7 @@ public interface UserMapper {
 
     @Select("select * from user where dr=0 and number=#{eo.number} and password=#{eo.password}")
     UserEo login(@Param("eo") UserEo userEo);
+
+    @Select("select * from user where id=#{id}")
+    UserEo selectUser(@Param("id") Integer id);
 }

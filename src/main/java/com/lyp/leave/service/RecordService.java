@@ -4,6 +4,7 @@ import com.lyp.leave.eo.Result;
 import com.lyp.leave.eo.eo.DataVo;
 import com.lyp.leave.eo.eo.RecordEo;
 import com.lyp.leave.mapper.RecordMapper;
+import com.lyp.leave.vo.RecordRequestVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -56,6 +57,19 @@ public class RecordService {
     public Result leaderSelectRecord(Integer id, Integer page, Integer limit) {
         page = (page - 1) * limit;
         List<DataVo> dataVos = recordMapper.leaderSelectRecord(id, page, limit);
+        Integer count = recordMapper.selectCount();
+        return new Result(0, "", dataVos, count);
+    }
+
+    public Result selectRecord(Integer page, Integer limit, RecordRequestVo vo) {
+        List<DataVo> dataVos1 = recordMapper.selectRecord(vo, page, limit);
+        Integer count = recordMapper.selectCount();
+        return new Result(0, "", dataVos1, count);
+    }
+
+    public Result teacherSelectRecord(Integer page, Integer limit) {
+        page = (page - 1) * limit;
+        List<DataVo> dataVos = recordMapper.teacherSelectRecord(page, limit);
         Integer count = recordMapper.selectCount();
         return new Result(0, "", dataVos, count);
     }

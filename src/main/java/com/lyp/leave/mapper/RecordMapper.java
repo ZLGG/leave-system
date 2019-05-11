@@ -2,6 +2,7 @@ package com.lyp.leave.mapper;
 
 import com.lyp.leave.eo.eo.DataVo;
 import com.lyp.leave.eo.eo.RecordEo;
+import com.lyp.leave.vo.RecordRequestVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -21,6 +22,9 @@ public interface RecordMapper {
 
     @Select("SELECT SQL_CALC_FOUND_ROWS r.id,s.userName,s.grade,s.clas,r.beginTime,r.endTime,s.phone,r.reason,r.createTime FROM user l,record r,user s WHERE l.role=3 AND l.dr = 0 AND r.dr = 0 AND  s.dr=0 AND s.college = l.college and r.`status` = 0 and r.studentId = s.id and l.id = ${id} and day>6 limit #{page},#{limit}")
     List<DataVo> leaderSelectRecord(@Param("id") Integer id,@Param("page")Integer page,@Param("limit")Integer limit);
+
+    @Select("select SQL_CALC_FOUND_ROWS r.id,u.userName,u.college,u.grade,u.clas,r.beginTime,r.endTime,u.phone,r.reason,r.status,r.auditorId,r.createTime from user u,record r,user u1 where u.id=r.studentId and u.dr=0 and r.dr=0 and u1.id=r.auditorId and status!=0 limit #{page},#{limit}")
+    List<DataVo> teacherSelectRecord(@Param("page") Integer page, @Param("limit") Integer limit);
 
     @Insert("INSERT INTO record (studentId,beginTime,endTime,reason,createTime,day,status) VALUES(#{eo.studentId},#{eo.beginTime},#{eo.endTime},#{eo.reason},now(),#{eo.day},0)")
     void insertRecord(@Param("eo") RecordEo RecordEo);
@@ -42,5 +46,17 @@ public interface RecordMapper {
 
     @Update("update record set status=3 ,auditorId = #{auditorId} where id=#{id}")
     void adoptRecord(@Param("auditorId") Integer auditorId, @Param("id") Integer id);
+
+    @Select("<script>" +
+            "select SQL_CALC_FOUND_ROWS r.id,u.userName,u.college,u.grade,u.clas,r.beginTime,r.endTime,u.phone,r.reason,r.status,r.createTime,u.auditorId from record r,user u where u.dr=0 and r.dr=0 and u.id=r.studentId and r.status!=0" +
+            "<if test='eo.beginTime!=null'>and r.endTime &gt;= #{eo.beginTime}</if>" +
+            "<if test='eo.endTime!=null'>and r.beginTime &lt;= #{eo.endTime}</if>" +
+            "<if test='eo.number!=null'>and u.number=#{eo.number}</if>" +
+            "<if test='eo.college!=null'>and u.college=#{eo.college}</if>" +
+            "<if test='eo.clas!=null'>and u.clas=#{eo.clas}</if>" +
+            "<if teat='eo.grade!=null'>and u.grade=#{eo.grade}</if>" +
+            "limit #{page},#{limit}" +
+            "</script>")
+    List<DataVo> selectRecord(@Param("eo")RecordRequestVo requestVo,@Param("page") Integer page,@Param("limit") Integer limit);
 
 }

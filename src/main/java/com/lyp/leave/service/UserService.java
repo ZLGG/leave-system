@@ -54,4 +54,9 @@ public class UserService {
         UserEo login = userMapper.login(userEo);
         return login;
     }
+
+    public UserEo selectUser(Integer id) {
+        UserEo userEo = userMapper.selectUser(id);
+        return userEo;
+    }
 }

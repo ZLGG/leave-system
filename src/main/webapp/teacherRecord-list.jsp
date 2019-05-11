@@ -47,21 +47,20 @@
           <button class="layui-btn"  lay-submit="" lay-filter="search"><i class="layui-icon">设置</i></button>
         </form>
       </div>--%>
-    <table class="layui-table" lay-data="{url:'/getProject',page:true,id:'test',toolbar: 'default'}" lay-filter="test">
+    <table class="layui-table" lay-data="{url:'/getRecord',page:true,id:'test',toolbar: 'toolbarDemo'}" lay-filter="test">
         <thead>
         <tr>
-            <th lay-data="{type:'checkbox'}">ID</th>
             <th lay-data="{field:'id', width:80, sort: true}">ID</th>
             <th lay-data="{field:'userName', width:120, sort: true}">姓名</th>
             <th lay-data="{field:'college', width:120, sort: true}">学院</th>
-            <th lay-data="{field:'grade', width:120, sort: true}">年级</th>
-            <th lay-data="{field:'class', width:120, sort: true}">班级</th>
-            <th lay-data="{field:'beginTime', width:120, sort: true}">开始时间</th>
-            <th lay-data="{field:'endTime', width:120, sort: true}">结束时间</th>
-            <th lay-data="{field:'phone', width:120, sort: true}">联系方式</th>
-            <th lay-data="{field:'reason', width:80 }" >原因</th>
-            <th lay-data="{field:'status', width:80 }">状态</th>
-            <th lay-data="{field:'auditor', width:80 }">审核人</th>
+            <th lay-data="{field:'grade', width:60, sort: true}">年级</th>
+            <th lay-data="{field:'clas', width:60, sort: true}">班级</th>
+            <th lay-data="{field:'beginTime', width:180, sort: true}">开始时间</th>
+            <th lay-data="{field:'endTime', width:180, sort: true}">结束时间</th>
+            <th lay-data="{field:'phone', width:180, sort: true}">联系方式</th>
+            <th lay-data="{field:'reason', width:280 }" >原因</th>
+            <th lay-data="{field:'statusName', width:80 }">状态</th>
+            <th lay-data="{field:'auditorIdName', width:80 }">审核人</th>
             <th lay-data="{field:'createTime',  minWidth: 160,width:180}">创建时间</th>
            <%-- <th lay-data="{ toolbar: '#barDemo'}">操作</th>--%>
         </tr>
@@ -108,7 +107,7 @@
     layui.use(['table','form'], function(){
         var table = layui.table;
         var form = layui.form;
-        $.ajax(
+       /* $.ajax(
             {
                 type:'get',
                 url:'/getTeacher',
@@ -127,7 +126,7 @@
                     layer.msg('异常');
                 }
             }
-        );
+        );*/
         //监听提交
         form.on('submit(search)', function(data){
             console.log(data);

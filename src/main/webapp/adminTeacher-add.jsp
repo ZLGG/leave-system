@@ -127,7 +127,7 @@
                 <span class="x-red">*</span>密码
             </label>
             <div class="layui-input-inline">
-                <input type="passWord" id="L_pass" name="passWord" required="" lay-verify="pass"
+                <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
                        autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -164,7 +164,7 @@
         form.verify({
             nikename: function (value) {
                 if (value.length < 11) {
-                    return '学号/工号至少得11个字符啊';
+                    return '工号至少得11个字符啊';
                 }
             }
             , pass: [/(.+){6,12}$/, '密码必须6到12位']

@@ -5,6 +5,7 @@ import com.lyp.leave.eo.eo.DataVo;
 import com.lyp.leave.eo.eo.RecordEo;
 import com.lyp.leave.eo.eo.UserEo;
 import com.lyp.leave.service.RecordService;
+import com.lyp.leave.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,8 @@ import java.util.List;
 public class RecordController {
     @Autowired
     private RecordService RecordService;
+    @Autowired
+    private UserService userService;
 
     @ResponseBody
     @RequestMapping("/session/{id}")
@@ -43,11 +46,12 @@ public class RecordController {
      */
     @ResponseBody
     @RequestMapping("/addRecord")
-    public Result addRecord(RecordEo RecordEo) throws Exception{
+    public Result addRecord(RecordEo RecordEo,HttpSession session) throws Exception{
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long time = simpleDateFormat.parse(RecordEo.getEndTime()).getTime();
         long time1 = simpleDateFormat.parse(RecordEo.getBeginTime()).getTime();
         long date = time - time1;
+        UserEo user = (UserEo) session.getAttribute("user");
         long l;
         if (date > 0) {
             l = date / 3600 / 1000/ 24;
@@ -55,6 +59,7 @@ public class RecordController {
             return new Result(-1,"","");
         }
         RecordEo.setDay(l);
+        RecordEo.setStudentId(user.getId());
         RecordService.insertRecord(RecordEo);
         return new Result(0,"","");
     }
@@ -182,6 +187,27 @@ public class RecordController {
     public Result leaderSelectRecord(Integer page, Integer limit, HttpSession session) {
         UserEo user = (UserEo) session.getAttribute("user");
         Result result = RecordService.leaderSelectRecord(user.getId(), page, limit);
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getRecord")
+    public Result getRecord(Integer page, Integer limit) {
+        Result result = RecordService.teacherSelectRecord(page, limit);
+        for (DataVo dataVo : (List<DataVo>) result.getData()) {
+            UserEo userEo = userService.selectUser(dataVo.getAuditorId());
+            dataVo.setAuditorIdName(userEo.getUserName());
+            if (dataVo.getStatus()==1) {
+                dataVo.setStatusName("已销假");
+            } else if (dataVo.getStatus() == 2) {
+                dataVo.setStatusName("已拒绝");
+            } else if (dataVo.getStatus() == 3) {
+                dataVo.setStatusName("待销假");
+            } else {
+                dataVo.setStatusName("待批准");
+            }
+
+        }
         return result;
     }
 }
